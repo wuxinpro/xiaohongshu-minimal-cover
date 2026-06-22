@@ -6,82 +6,64 @@
 
 | 科技新品 | 行业新闻 | 教程技巧 |
 |---------|---------|---------|
+| ![GPT-5.6 下周发布](images/demo-gpt56.png) | ![豆包 AI 打车](images/demo-doubao.png) | ![ChatGPT 实测](images/demo-chatgpt.png) |
 | 🤗 兴奋机器人 | 🤗 兴奋机器人 | 🤔 思考机器人 |
-| GPT-5.6 下周发布 | 豆包 AI 能打车了！ | 截图秒变代码 |
 
-> 所有效果均可通过脚本一键生成，无需手动设计。
-
-## 设计规范
-
-- **比例**: 3:4 竖版（1080×1440）
-- **卡片**: 白色圆角（40px）+ 三层柔和阴影 + 颗粒肌理
-- **标题**: 两行居中，#1a1a1a 深炭黑，字号自适应
-- **关键词**: #FF6B35 橙色高亮（品牌词 + 业务词）
-- **图标**: 右上角 100px 机器人 SVG（3 种表情自适应匹配）
-- **分隔线**: 标题区与标语之间 60px 极浅灰细线
-- **标语**: 靠右对齐，#555 浅灰
-
-## 快速开始
+## 安装到 Codex
 
 ```bash
-# 完整标题（自动拆行）
+# 通过 CLI 安装（推荐）
+npx skills add wuxinpro/xiaohongshu-minimal-cover
+
+# 或手动克隆到 skills 目录
+git clone https://github.com/wuxinpro/xiaohongshu-minimal-cover.git
+```
+
+安装后，在 Codex 中直接说"做一个小红书封面"或"生成极简封面"即可使用。
+
+## 独立使用
+
+```bash
+# 完整标题（自动按标点拆行）
 python scripts/generate_cover.py --title "GPT-5.6 下周发布！截图秒变代码"
 
 # 手动指定两行 + 标语
-python scripts/generate_cover.py \
-  --line1 "豆包 AI 能打车了！" \
-  --line2 "一句话叫车" \
-  --slogan "字节悄悄布局出行赛道"
+python scripts/generate_cover.py --line1 "豆包 AI 能打车了！" --line2 "一句话叫车" --slogan "字节悄悄布局出行赛道"
 
 # 仅指定标题，标语自动生成
 python scripts/generate_cover.py --title "ChatGPT突然变快了？新功能实测太香了！"
 ```
 
-生成后打开 `preview/xiaohongshu-minimal-cover.html` 即可在浏览器中预览。
+生成后打开 `preview/*.html` 在浏览器中预览。
+
+## 设计规范
+
+- **比例**: 3:4 竖版（1080×1440），白色圆角卡片独立作为封面
+- **标题**: 两行居中，#1a1a1a 深炭黑，**字号自适应**确保一行完整显示
+- **关键词**: #FF6B35 橙色高亮（品牌词 + 业务词，每行 ≤ 2 个）
+- **图标**: 右上角 100px 机器人 SVG（3 种表情按文案自动匹配）
+- **标语**: 靠右对齐，#555 浅灰 20px
 
 ## 文件结构
 
 ```
 xiaohongshu-minimal-cover/
-├── SKILL.md                     ← Codex 技能定义 + 完整设计规范
-├── README.md                    ← 本文件
-├── preview/
-│   └── xiaohongshu-minimal-cover.html  ← 最新生成的预览
+├── SKILL.md          ← Codex 技能定义 + 完整设计规范
+├── README.md         ← 本文件
+├── images/           ← 效果截图
+├── preview/          ← 生成的 HTML 预览
 └── scripts/
-    ├── cover_template.html       ← HTML 布局模板（7 个占位符）
-    └── generate_cover.py         ← 核心生成器
+    ├── cover_template.html  ← HTML 布局模板
+    └── generate_cover.py    ← 核心生成器
 ```
-
-## 参数说明
-
-| 参数 | 说明 | 必需 |
-|------|------|------|
-| `--title` | 完整标题，自动拆为两行 | 与 line1/line2 二选一 |
-| `--line1` | 第一行文本 | 与 title 二选一 |
-| `--line2` | 第二行文本 | 与 title 二选一 |
-| `--slogan` | 标语（不传则自动生成） | 可选 |
-| `--app-title` | 小红书发布标题 | 可选 |
-| `--output` | 输出路径 | 可选 |
-
-## 自适应字号
-
-脚本根据文本宽度自动缩放第一行字号（55px ~ 100px），确保标题一行完整显示不折行。
-第二行字号 = 第一行 × 0.72。
 
 ## 机器人图标
 
-根据文案语义自动匹配 3 款机器人 SVG 图标（右上角 100px）：
-
-| 风格 | 触发关键词 | 预览 |
-|------|-----------|------|
-| 🤖 标准 | 默认 | 圆脸 + 天线 + 微笑 |
-| 🤗 兴奋 | 发布/升级/变快/太香了/布局 | 张嘴笑 + 眼角星光 |
-| 🤔 思考 | 教程/秒变/代码/步骤 | 抿嘴疑问 |
-
-## 小红书发布建议
-
-- **app 标题**: 与封面内容一致，补充品牌词 + 行为词，搜索友好
-- **封面以感叹号收尾**增加点击感
+| 风格 | 触发场景 |
+|------|---------|
+| 🤖 标准机器人 | 通用 AI 科技内容 |
+| 🤗 兴奋机器人 | 新品发布/行业新闻/惊喜评测 |
+| 🤔 思考机器人 | 教程技巧/代码分享 |
 
 ## 依赖
 
