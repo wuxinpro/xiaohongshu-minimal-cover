@@ -125,6 +125,22 @@ def calc_adaptive_size(text):
 </svg>
 ```
 
+
+## 导出为 PNG
+
+使用 \--export\ 参数自动输出 1080×1440 PNG：
+
+\\\ash
+python scripts/generate_cover.py --title "GPT-5.6 下周发布！截图秒变代码" --export images/cover.png
+\\\
+
+导出流程：
+1. 生成 810×1080 HTML 预览
+2. 自动缩放所有 px 值 × 4/3 → 1080×1440
+3. 使用 Playwright 截图输出 PNG
+4. 可直接用于小红书发布
+
+> Playwright 会在首次运行时自动安装，如失败可手动截图预览页面。
 ## 输出
 
 - `preview/*.html` — 浏览器可打开的预览文件（810×1080 缩放预览）
