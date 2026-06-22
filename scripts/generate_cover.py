@@ -256,6 +256,39 @@ def render(line1, line2, slogan='', icon_svg=None, title=None):
     return html
 
 
+def export_png(html_path, output_png):
+    """Scale preview HTML to 1080×1440 and export as PNG using Playwright"""
+    import re, subprocess, tempfile
+    
+    scale = 4.0 / 3.0  # 810→1080
+    
+    with open(html_path, 'r', encoding='utf-8') as f:
+        html = f.read()
+    
+    def scale_px(m):
+        v = int(m.group(1))
+        return str(round(v * scale)) + 'px'
+    
+    html_scaled = re.sub(r'(\d+)px', scale_px, html)
+    
+    scaled_path = html_path.replace('.html', '-1080.html')
+    with open(scaled_path, 'w', encoding='utf-8') as f:
+        f.write(html_scaled)
+    
+    # Try Playwright
+    try:
+        result = subprocess.run(
+            f'npx playwright screenshot --viewport-size 1080,1440 "file:///{scaled_path}" "{output_png}"',
+            capture_output=True, text=True, shell=True, timeout=120
+        )
+        if result.returncode == 0:
+            return True, output_png
+        else:
+            return False, f'Playwright error: {result.stderr[:200]}'
+    except Exception as e:
+        return False, f'Export error: {str(e)[:200]}'
+
+
 def main():
     parser = argparse.ArgumentParser(description='生成小红书极简扁平封面')
     parser.add_argument('--title', default=None, help='完整标题（自动拆行）')
@@ -263,6 +296,7 @@ def main():
     parser.add_argument('--line2', default=None, help='第二行')
     parser.add_argument('--slogan', default=None, help='标语（可选）')
     parser.add_argument('--app-title', default=None, help='小红书发布标题')
+    parser.add_argument('--export', default=None, help='导出为 PNG 到指定路径（需安装 Playwright）')
     parser.add_argument('--output', default=None, help='输出路径')
 
     args = parser.parse_args()
@@ -304,6 +338,18 @@ def main():
     else:
         print(f'📱 小红书发布标题建议: {line1} {line2}')
 
+
+    # Export to PNG if requested
+    if args.export:
+        import os as _os
+        html_path = output_path
+        result, msg = export_png(html_path, args.export)
+        if result:
+            print(f'✅ 已导出 1080×1440 PNG: {msg}')
+        else:
+            print(f'⚠️ 导出失败: {msg}')
+            print(f'   预览 HTML 仍在: {abs_path}')
+            print(f'   可以手动截图: 在浏览器中打开预览，截图保存为 1080×1440')
 
 if __name__ == '__main__':
     main()
