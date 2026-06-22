@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{TITLE}}</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { display: flex; justify-content: center; align-items: center; min-height: 100vh; background: #e8eaec; }
+  .card {
+    width: 810px; height: 1080px;
+    background: #ffffff;
+    border-radius: 40px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03), 0 16px 40px rgba(0,0,0,0.05), 0 32px 80px rgba(0,0,0,0.03), 0 0 0 1px rgba(0,0,0,0.02);
+    position: relative;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 60px 56px; overflow: hidden;
+  }
+  .card::before {
+    content: ''; position: absolute; inset: 0; opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.4' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-repeat: repeat; background-size: 200px 200px; pointer-events: none; border-radius: 40px;
+  }
+  .icon { position: absolute; top: 40px; right: 40px; width: 100px; height: 100px; z-index: 1; }
+  .icon svg { width: 100%; height: 100%; display: block; }
+  .kw { color: #FF6B35; }
+  .title-block {
+    text-align: center; position: relative; z-index: 1;
+    display: flex; flex-direction: column; align-items: center; gap: 20px;
+    width: 100%;
+  }
+  .line-1 {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'PingFang SC', 'Helvetica Neue', sans-serif;
+    font-size: {{LINE1_SIZE}}px; font-weight: 800; color: #1a1a1a;
+    letter-spacing: 0px; line-height: 1.1; text-align: center; white-space: nowrap;
+  }
+  .line-2 {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'PingFang SC', 'Helvetica Neue', sans-serif;
+    font-size: {{LINE2_SIZE}}px; font-weight: 700; color: #1a1a1a;
+    letter-spacing: 1px; line-height: 1.15; text-align: center; white-space: nowrap;
+  }
+  .separator {
+    width: 60px; height: 2px;
+    background: #D6D8DA; border-radius: 1px;
+    margin-top: 12px; margin-bottom: 4px;
+  }
+  .slogan {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'PingFang SC', 'Helvetica Neue', sans-serif;
+    font-size: 20px; font-weight: 400; color: #555555;
+    text-align: right; margin-right: 8px; position: relative; z-index: 1;
+    align-self: flex-end;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="icon">{{ICON_SVG}}</div>
+    <div class="title-block">
+      <div class="line-1">{{LINE1_HTML}}</div>
+      <div class="line-2">{{LINE2_HTML}}</div>
+    </div>
+    <div class="separator"></div>
+    <div class="slogan">{{SLOGAN_TEXT}}</div>
+  </div>
+</body>
+</html>
