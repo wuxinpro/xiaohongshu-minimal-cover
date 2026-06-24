@@ -1,54 +1,70 @@
-# 🤖 小红书极简扁平封面生成器 (xiaohongshu-minimal-cover)
+# xiaohongshu-minimal-cover
 
-自动生成符合「6/16 极简扁平封面规范」的小红书 3:4 竖版封面图。
+Generate Swiss International style carousel images for Xiaohongshu (小红书). Clean, minimal, data-driven — no emojis, no rounded corners, no gradients.
 
-## 效果预览
+A Claude Code skill optimized for tech, AI tools, policy analysis, and product launch content.
 
-| GPT-5.6 下周发布 | 豆包 AI 打车 | ChatGPT 实测 |
-|---------|---------|---------|
-| ![GPT-5.6](images/demo-gpt56.png) | ![豆包](images/demo-doubao.png) | ![ChatGPT](images/demo-chatgpt.png) |
+## Quick Start
 
-## 安装到 Codex
+1. Install into `.claude/skills/xiaohongshu-minimal-cover/`
+2. Tell Claude: "帮我用 xiaohongshu-minimal-cover 做一组小红书配图"
+3. Claude will ask for content, pick an accent, plan pages, and render PNGs
 
-```bash
-npx skills add wuxinpro/xiaohongshu-minimal-cover
+## Visual Style
+
+**Swiss International** — engineered, quantified, decisive.
+
+- Inter/Helvetica vibe (uses system fonts — works offline)
+- Strict left-aligned grid + hairline rules
+- Single accent color (6 palettes available)
+- Card-fill matrices, KPI towers, h-bar charts, numbered statements
+
+### Accent Palettes
+
+| Palette | Color | Vibe |
+|---------|-------|------|
+| `slate` | `#2c898a` teal | Developer tools, tech products |
+| `crimson` | `#c0392b` red | Policy, warnings, bold claims |
+| `ikb` | `#002FA7` blue | AI, general tech |
+| `lemon-green` | `#C5E803` green | Health, ecology, emerging tech |
+| `safety-orange` | `#FF6B35` orange | Industrial, risk alerts |
+| `wisteria` | `#7d5ba6` purple | Creative, art, wellness |
+
+## File Structure
+
+```
+xiaohongshu-minimal-cover/
+  SKILL.md                        ← Skill definition & workflow
+  README.md                       ← This file
+  assets/
+    template-swiss.html           ← Seed HTML template (copy & fill)
+  references/
+    layout-recipes.md             ← 10+ layout patterns
 ```
 
-## 快速使用
+## Examples
 
-```bash
-# 生成预览 + 导出 1080×1440 PNG（推荐）
-python scripts/generate_cover.py --title "GPT-5.6 下周发布！截图秒变代码" --export cover.png
+Built with this skill:
 
-# 仅生成 HTML 预览
-python scripts/generate_cover.py --title "GPT-5.6 下周发布！截图秒变代码"
+- **MiMo Code launch** (7 pages, slate accent) — AI coding tool product launch
+- **Capafy marketplace** (4 pages, slate accent) — AI infrastructure industry analysis
+- **AI labeling policy** (3 pages, crimson accent) — government regulation explainer
+- **Win11 Intelligent Terminal** (3 pages, slate accent) — tech product feature showcase
 
-# 自定义两行 + 标语
-python scripts/generate_cover.py --line1 "豆包 AI 能打车了！" --line2 "一句话叫车" --slogan "字节悄悄布局出行赛道"
-```
+## Requirements
 
-## 参数
+- Claude Code (any version)
+- Playwright (for PNG rendering)
+- No external fonts needed (uses Microsoft YaHei / PingFang SC)
 
-| 参数 | 说明 |
-|------|------|
-| `--title` | 完整标题，自动拆为两行 |
-| `--line1` / `--line2` | 手动指定两行 |
-| `--slogan` | 标语（自动生成） |
-| `--export` | 导出为 1080×1440 PNG（需 Playwright，自动安装） |
-| `--app-title` | 小红书发布标题 |
-| `--output` | 预览 HTML 输出路径 |
+## Design Principles
 
-## 设计规范
+1. **Expression first** — each page answers one question in one glance
+2. **Data over decoration** — numbers, labels, grids; never blobs or emojis
+3. **The larger, the lighter** — display titles at weight 200-300
+4. **One accent per deck** — never mix colors
+5. **System fonts only** — renders reliably on Windows without Google Fonts
 
-- **比例**: 3:4 竖版（1080×1440），白色圆角卡片独立作为封面
-- **标题**: 两行居中，深炭黑 #1a1a1a，字号自适应不折行
-- **关键词**: #FF6B35 橙色高亮
-- **图标**: 右上角机器人 SVG（3 种表情按文案匹配）
-- **标语**: 靠右对齐 20px #555
+## License
 
-## 自适应导出流程
-
-1. 脚本生成 810×1080 HTML 预览
-2. 使用 `--export` 时自动缩放所有 px 值 × 4/3
-3. Playwright 截图输出 1080×1440 PNG
-4. 可直接用于小红书发布
+MIT
