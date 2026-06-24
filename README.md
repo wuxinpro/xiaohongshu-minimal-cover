@@ -54,6 +54,9 @@ xiaohongshu-minimal-cover/
 
 ## Examples
 
+![MiMo Code cover — Swiss International, slate accent](https://raw.githubusercontent.com/wuxinpro/xiaohongshu-minimal-cover/main/examples/mimo-code-cover.png)
+![Capafy cover — Swiss International, slate accent](https://raw.githubusercontent.com/wuxinpro/xiaohongshu-minimal-cover/main/examples/capafy-cover.png)
+
 Built with this skill:
 
 - **MiMo Code launch** (7 pages, slate accent) — AI coding tool product launch
