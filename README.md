@@ -6,9 +6,19 @@ A Claude Code skill optimized for tech, AI tools, policy analysis, and product l
 
 ## Quick Start
 
-1. Install into `.claude/skills/xiaohongshu-minimal-cover/`
-2. Tell Claude: "帮我用 xiaohongshu-minimal-cover 做一组小红书配图"
-3. Claude will ask for content, pick an accent, plan pages, and render PNGs
+**One-line install:**
+```bash
+curl -fsSL https://raw.githubusercontent.com/wuxinpro/xiaohongshu-minimal-cover/main/install.sh | bash
+```
+
+**Manual install:**
+```bash
+git clone --depth 1 https://github.com/wuxinpro/xiaohongshu-minimal-cover.git ~/.claude/skills/xiaohongshu-minimal-cover
+```
+
+**Then:**
+Tell Claude: "帮我用 xiaohongshu-minimal-cover 做一组小红书配图"
+Claude will ask for content, pick an accent, plan pages, and render PNGs.
 
 ## Visual Style
 
